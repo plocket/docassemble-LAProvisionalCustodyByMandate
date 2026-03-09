@@ -1,0 +1,964 @@
+comment: |
+  # TODOs
+
+  ## == SME-related (LA) ==
+
+  1. Is this the correct doc: https://www.legis.la.gov/Legis/Law.aspx?p=y&d=108362
+  1. Does a notary cost money? How much? (Same in all states?)
+  1. Do they need a notary or just anyone who can take oaths? Who other than a notary can take oaths? Where is a link to official documentation on that?
+  1. Must a notary be present when the user puts the dates on the document? Or can we add it to the document automatically during this interview?
+  1. Need to initialize in front of a notary?
+  1. Is "certification" the same thing as "notarization"? (Add question to AK form)
+  1. Does LA have self-certification or other alternative option to a notary?
+  1. Is the signing date the same as the start date?
+  1. Should we allow putting a future signature date/start date at the top? How about on the signature lines?
+  1. Does this form have/need a form number? (Maybe §954?)
+  1. Does this form need a LIST topic? If so, what LIST ID is this doc?
+  1. Clarify term for decision-maker (mandatary is uncommon nomanclature)
+  1. Initially print 2 or 3 documents and then sign all of them individually? (instead of copying the signed doc later)? May be easier for those lacking printers/scanners.
+  1. Abortion, marriage, adoption, child-protection decisions disallowed?
+  1. TX form mentions legal ramifications for leaving children for long time. In LA too?
+  1. Is it required that the attorney-in-fact be 18 years old or older?
+  1. Should birth certificates and such be copies or originals?
+  1. What are valid forms of id (for notary)? And what is a link to more official information?
+  1. Does the prospective attorney-in-fact need a valid photo ID too?
+  1. If the person can't find a notary should we prevent them from moving forward?
+  1. One the court form, italicized text indicates a dynamic value. This text is italicised: the person(s) having parental authority. What is the variable? The number of people? The type of authority?
+  1. Can we allow digital signatures?
+  1. Can we remove gendered language where possible? (use "the child" instead of "him", etc.)
+  1. "[this expiration date] or one year from date hereof, whichever period is shorter." - shall we replace with just a date that has the correct limitations, or keep the language, but pick the one that's shorter?
+  1. "witnesses" - does the mandatary count as a witness? If not, if there's only one parent does there need to be another witness? If not, shall I change the noun based on how many parents are present?
+  1. Does "appearer(s)" include the mandatary? If so, can we just make this plural. If not, shall I adjust the language based on the number of parents present.
+  1. If only one parent is present, does the user have to do anything special, like mail the other parent the document? Do we need language like the language in the TX document at https://github.com/SuffolkLITLab/docassemble-TXAuthorizationForNonparentCareOfAChild/blob/fa00af8f5a4183ecdfdad68073093a71b59f79fc/docassemble/TXAuthorizationForNonparentCareOfAChild/data/questions/authorization_agreement_for_voluntary_adult_caregiver.yml#L53-L56
+  1. If there's only one parent present should we hide the signature line for the second parent?
+  1. Is it ok to add the names printed under the signatures?
+  1. Must the child be a minor to use this form?
+  1. Are there any negative consequences if the parent signs this and then stays present in the area?
+  1. If only 1 of 2 parents is there, how do we include the 2nd parent in the next steps doc? For example, can they still cancel the agreement? Do we still need their name, address, etc?
+  1. Where can I find the definition for a tutor/provisional tutor? Also, if just one child of a group of children gets a tutor, is the mandate cancelled for all of the children or just that one child?
+  1. How does a parent or caregiver cancel the custody? Using a letter? Email? Verbal agreement?
+
+  ## == Technical (LA) ==
+
+  1. What branding package should we use?
+  # 1. Mandates are not beinng listed in order despite omap.
+  # 1. DOCX not underlining underlined items. Just mac Pages app?
+  1. The ID info belongs to the `users[0]` obj. Does the notary info need to do so as well? Rather, what info should be on `users[0]`?
+  # 1. The table lines are appearing at the top of the page.
+  # 1. Discuss: Use `children` obj or not? This will confuse other interviews for the user because, as a user, they may have children that are older or for whom they don't want to get parental delegation. Also, should the children belong to `users[0]`?
+  1. Research how to detect a "checkin" so we can let a user know when TARGET template is refreshing, but not yet refreshed (in the case of long server delays).
+  1. With `enable if:` on True why is the field enabled when relevant yesnomaybe question has no answer?
+
+  ## == General (LA) ==
+
+  1. If there is only one parent present, change DOCX to not list second parent in the starting paragraph.
+  1. If digital signature allowed, ask for signature if signing today.
+  1. Should we let someone set the starting date for today?
+  1. Intro screen says "You will need to deliver it on your own." that seems like a mismatch for this form. Do we want to replace that?
+  1. Should we ask user if they have a printer? Scanner?
+  1. Recommend mentioning stapler? How many people have staplers? I have one, but I'm not sure I have staples.
+  1. Review flow of notary/id questions.
+  1. Ask about children 1 at a time? If as a group, how? Must have only minors, etc. Tough flow.
+  1. In final document, put the signatures on their own page so they're together? (Also, tables crossing page borders caused extra lines in other docs. Must check on that here.) Or keep as is?
+  1. "Next Steps" doc - what should be in "Learn more"?
+  1. Should we include a translation of the final doc? There's extra info on there and they'll see what each field is supposed to contain.
+  1. Change terms and conditions? Still use MA ones? What should be on that first page?
+  1. Just tell max time instead of having them pick an end time?
+  1. [Use an alert (as discussed with the group) or a "check this date" button. Also, group discussed putting error alert below the end date to get more attention]. On the start/end date page, how do we get the user to blur the end date field without pressing "next" so that they can see a warning message that might pop up?
+  1. Put end-expiry date field on next page so we can use the start date as the lower limit?
+  1. Should the saved start/end dates, if they exist, be written in the reminder as 05/02/2026 or May 02, 2026?
+  1. "Next steps" doc: Should we include the start/end date rules even if the user chose to give us dates for reminders instead of choosing to pick their dates later?
+  1. Explain (where) that a max of 2 parents can be listed?
+  1. Since names don't need to be in separate parts, do we want to collect whole names instead?
+  1. If there are no negative consequences for the parent signing ASAP, shall we tell them so? In case they're worried they might need it before they have another chance to sign it?
+  1. Should we allow "maybe" for whether the other parent will be there? If so, what should we do with a "maybe"? Put only one parent on the form and tell them to print 1 extra doc for the 2nd parent and just give it by hand?
+  1. If they need to mail a letter to the 2nd parent, shall we help them with mailing that in some way? Link to getting stamps online? Label to print for the envelope (seems excessive)?
+  1. Repeating, on the "next steps" doc, the warning about a parent being absent too long being a problem?
+  1. How long is too long? I realize there's no exact date, but is there a range? As a parent, I'd be constantly worrying that it had been too long.
+  1. Order of last page sections: 1. Before finishing, 2. document list/email, 3. next steps. Or 1. Before finishing, 2. next steps, 3. document list/email
+  1. Generic name ideas for this form: Temporary custody of a minor
+---
+include:
+  - docassemble.AssemblyLine:assembly_line.yml
+  # - docassemble.ALAnyState:any_state.yml
+  # - docassemble.ALLouisianaSC:custom_organization.yml
+---
+metadata:
+  title: >-
+    Louisiana Provisional Custody by Mandate
+  short title: >-
+    LA Custody by Mandate
+  # description: |-
+  #   This form helps a parent in Louisiana create a Louisiana Provisional Custody by Mandate form. If you cannot find a parent [TODO: SME: or guardian?], you might need a different court process.
+    
+  #   You may want to use this form if you are a parent who needs to leave your children with a relative or family friend for a while. You can give that person temporary permission to make important decisions about your child or children's medical situations, schools, discipline, and other situations. For example: before you travel outside of the United States, either for a short or a long time.
+
+  #   Leaving children with a non-parent for a long time can affect parental rights, so think about legal advice.
+    
+  #   You do not need to go to court to use this form, so it may be a good alternative to a guardianship or custody case.
+    
+  #   The caregiver you choose to make these decisions for your children must be at least 18 years old. They do not have to be a family member [TODO: SME about family member]. The caregiver cannot consent to an abortion or emergency contraception [TODO: ask LA SME].
+    
+  #   You can cancel the agreement at any time [TODO: ask LA SME how].
+  # can_I_use_this_form: |
+  #   You can use this form if you are a parent in Louisiana and you want to give temporary permission to another person to make decisions for your child while you are away.
+    
+  #   This authorization does not allow the new caregiver to give permission for an abortion or emergency contraception. [TODO: ask SME about wording]
+  # before_you_start: |
+  #   Before you start, find this information:
+    
+  #   * The contact information for a Louisiana notary. You will need to sign the form in front of that notary, so make sure you know where you can find one. Anyone over 18 can apply to be a notary. [TODO: Ask LA SME]
+  #   * The children's full names.
+  #   * Each parent's current address.
+  #   * A caregiver to make decisions for your child. They must be 18 years old or older.
+  #   * The caregiver's current address.
+  #   * Any important documents your children have that you may want to share with the caregiver (birth certificate, insurance card, school or medical records). [TODO: Ask SME - for LA too?]
+    
+  #   If only one parent signs, you must usually mail a copy of the signed form [TODO: twice?] to the other parent within 10 days. [TODO: Ask LA SME about notification] You might be able to skip mailing a copy in limited situations, such as when it is unsafe to contact the other parent.
+    
+  #   When you are finished, you will need to:
+    
+  #   1. Sign the agreement in front of a notary.
+  #   1. Print 3 (TODO: SME: 4 to send 2 to other parent?) copies of the agreement. [DONE: Yes to wet sigantures. Updated the template.] TODO:  Ask SME - Wet signatures needed on all?]
+  #   1. Keep one copy for your records.
+  #   1. Give the caregiver a copy.
+  #   1. If only one parent signed, you must usually mail a copy to the other parent within 10 days by certified mail (return receipt requested) and by regular mail [TODO: 2 letters? Ask SME].
+  #   1. You can cancel the agreement at any time.
+  #   1. You may also want to add the caregiver as an emergency contact with the children's school, doctor, and childcare provider.
+  maturity: "production"
+  estimated_completion_minutes: 15
+  estimated_completion_delta: 5
+  LIST_topics:
+    - "FA-00-00-00-00"
+  tags:
+    - "FA-00-00-00-00"
+  authors:
+    - "@plocket"
+  original_form:
+    - "https://www.legis.la.gov/Legis/Law.aspx?p=y&d=108362"
+  original_form_published_on: ""
+  allowed_courts: []
+  typical_role: "na"
+  al_weaver_version: "1.11.0"
+  generated_on: "2026-02-09"
+  languages:
+    - "en"
+  jurisdiction: "NAM-US-US+LA"
+  review_date: "2026-02-09"
+  form_titles:
+    - "Louisiana Provisional Custody by Mandate"
+  form_numbers:
+    - "954"
+  update_notes: |
+---
+code: |
+  # This controls the default country and list of states in address field questions
+  AL_DEFAULT_COUNTRY = "US"
+---
+code: |
+  # This controls the default state in address field questions
+  AL_DEFAULT_STATE = "LA"
+---
+code: |
+  github_repo_name =  'docassemble-LAProvisionalCustodyByMandate'
+---
+code: |
+  interview_short_title = "Fill in a Lousiana Provisional Custody by Mandate form."
+---
+code: |
+  al_form_type = "other_form" 
+---
+objects:
+  - users: ALPeopleList.using(there_are_any=True, complete_attribute="complete")
+  - caregivers: ALPeopleList.using(ask_number=True, target_number=1)
+  - parental_delegation_children: ALPeopleList.using(there_are_any=True)
+---
+sections:
+  - review_la_provisional_custody_by_mandate: Review your answers
+---
+#################### Interview order #####################
+comment: |
+  Controls order and branching logic for questions specific to this form
+id: interview_order_la_provisional_custody_by_mandate
+# code: |
+#   # Set the allowed courts for this interview
+#   nav.set_section("review_la_provisional_custody_by_mandate")
+#   user_role = "na"
+#   user_ask_role = "na"
+#   users.gather()
+#   set_parts(subtitle=str(users))
+#   users[0].address.address
+#   set_progress(20)
+#   children.gather()
+#   caregivers.gather()
+#   if not caregivers[0].is_major:
+#     if wants_new_caregiver:
+#       undefine(caregivers[0].attrname('is_major'))
+#       invalidate('caregivers[0].name.first')
+#     else:
+#       underage_caregiver_kickout
+#   caregivers[0].address.address
+#   set_progress(40)
+#   provisional_custody_mandates
+#   provisional_custody_expiration_date
+#   set_progress(50)
+#   users[0].is_married
+#   users[1].is_married
+#   set_progress(60)
+#   users[0].initials  # TODO: Ask LA SME
+#   set_progress(80)
+#   interview_order_la_provisional_custody_by_mandate = True
+code: |
+  nav.set_section("review_la_provisional_custody_by_mandate")
+  user_role = "na"
+  user_ask_role = "na"
+  users.gather()
+  set_parts(subtitle=str(users))
+  set_progress(10)
+  # Let them know about the notary early
+  notary
+  users[0].certification_next_steps
+  [user.has_valid_id for user in users]
+  set_progress(30)
+  # Discuss: Better to ask about the caregiver first, so we can kick out on underage
+  # Not quite as motivation aware as asking about the children first
+  caregivers.gather()
+  caregivers[0].is_major
+  caregivers[0].has_valid_id
+  set_progress(40)
+  ## Alternative flow:
+  # if parental_delegation_children.target_number > 1:
+  #   parental_delegation_children.target_number = num_parental_delegation_children_multi_minors
+  parental_delegation_children.gather()
+  set_progress(50)
+  [user.address.address for user in users]
+  [user.is_married for user in users]
+  caregivers[0].address.address
+  set_progress(70)
+  parental_delegation_mandates
+  set_progress(90)
+  parental_delegation_dates
+  if decide_delegation_dates_later:
+    knows_signing_date = False
+    signature_date = ""
+  else:
+    knows_signing_date = True
+    signature_date = delegation_start_date
+  set_progress(90)
+  interview_order_la_provisional_custody_by_mandate = True
+---
+###################### Main order ######################
+comment: |
+  This block includes the logic for standalone interviews.
+  Delete mandatory: True to include in another interview
+mandatory: True
+code: |
+  # al_intro_screen
+  la_provisional_custody_by_mandate_intro
+  interview_order_la_provisional_custody_by_mandate
+  # Avoid storing data
+  la_provisional_custody_by_mandate_download_plain
+---
+id: Louisiana_Provisional_Custody_by_Mandate
+continue button field: la_provisional_custody_by_mandate_intro
+question: |
+  Louisiana Provisional Custody by Mandate
+subquestion: |
+  This form helps a parent or guardian in Louisiana let a family member or other person temporarily make important decisions for their children by making a document called "Louisiana Provisional Custody by Mandate".
+
+  For example, if you are a parent and need to leave the United States, the person you choose can make decisions about your children's medical situations, schools, and other situations.
+
+  You do not need to go to court to use this form, so it may be a good alternative to a guardianship or custody case.
+
+  Leaving children with a non-parent for a long time can affect parental rights, so think about getting legal advice.
+
+  :clock: Most people take about 15 minutes to finish this form.[BR]
+  :lock: This tool will **not** save your information. If you close this page you may have to start this form all over again.
+  
+  **Before you start**:
+
+  1. Make sure you can print 2 or 3 copies of the final document.
+  1. Decide how long you want the decision-maker to have permission to make the decisions. Unless you are in the US military it must be a year or less.
+  1. Find someone who has the power to take oaths or [a notary](https://courtformsonline.org/guides/finding-and-using-a-notary) certified in Louisiana. Many times, someone can become a notary fairly easily. The notary must see you and the decision-maker sign the document and then they must stamp the document.
+  1. Find out each parent's current address and whether they are married.
+  1. You will have to fill out some more of this form by hand when you meet with the notary.
+  1. Choose the person who will make decisions for your children. The person must be 18 years old or older.
+  1. Find out their address.
+  
+  When you are finished, you will need to:
+  
+  1. Sign all the documents in front of the [notary](https://courtformsonline.org/guides/finding-and-using-a-notary).
+  1. Keep one signed copy for your records.
+  1. Give the decision-maker a signed copy of the document.
+
+  You may also want to:
+
+  1. Add the decision-maker as an emergency contact with the children's school, doctor, and childcare provider.
+  1. Give the decision maker important documents your children have, like birth certificates, insurance cards, and school or medical records.
+  
+  You can cancel the agreement at any time.
+---
+id: gather 2 users max
+code: |
+  users[i].name.first
+  if i > 0:
+    users.there_is_another = False
+    users.gathered = True
+  users[i].complete = True
+---
+id: delegation children have another parent
+question: |
+  Other parent
+fields:
+  - Do the children have another parent?: other_delegation_parent_exists
+    datatype: yesnoradio
+  - Will that parent be there to sign the documents?: users.there_is_another
+    datatype: yesnoradio
+    show if: other_delegation_parent_exists
+---  
+id: other delegation parent's name
+sets:
+  - users[i].name.first
+  - users[i].name.last
+  - users[i].name.middle
+  - users[i].name.suffix  
+question: |
+  % if i == 0 and al_person_answering == "user":
+  What is your name?
+  % else:
+  What is the name of the other parent?
+  % endif
+fields:
+  - code: |
+      users[i].name_fields()
+---
+id: certification next steps
+continue button field: notary
+question: |
+  Notary
+subquestion: |
+  You must **wait** to date and sign your document until you are in front of someone who has the power to take oaths, like [a notary public](https://courtformsonline.org/guides/finding-and-using-a-notary).
+  
+  * A court clerk can do this for free.
+  * Bring a valid photo ID with you.
+
+  To help you make a plan, we can add this answer to your reminder document. You can skip the question if you want.
+fields:
+  - What will your next steps be to find a notary or other person with the power to take oaths?: users[0].certification_next_steps
+    required: False
+---
+id: user ID
+question: |
+  Your ID
+subquestion: |
+  When you see a notary, bring a valid photo ID with you.
+
+  ${ valid_forms_of_id }
+  
+  These questions are to help you make a plan. We will add these answers to your reminder document. You can skip any of these questions if you want.
+fields:
+  - Do you have a valid photo ID with you now?: users[0].has_valid_id
+    datatype: yesnomaybe
+    required: False
+  # Do we need both of the following questions?
+  - Can you get or find a valid photo ID?: users[0].can_get_valid_id
+    datatype: yesnomaybe
+    required: False
+    js show if: |
+      val('users[0].has_valid_id') == "None" || val('users[0].has_valid_id') == false
+  - "So we can remind you later, what will be your next steps for getting a valid ID?": users[0].valid_id_next_steps
+    required: False
+    js show if: |
+      val('users[0].has_valid_id') == "None" || val('users[0].has_valid_id') == false
+---
+id: names of people
+sets:
+  - caregivers[0].name.first
+  - caregivers[0].name.last
+  - caregivers[0].name.middle
+  - caregivers[0].name.suffix
+generic object: ALPeopleList
+question: |
+  Who do you want to make decisions for your children?
+subquestion: |
+  This person is called the "attorney-in-fact" on the final document.
+  
+  You will give this person permission to make decisions for your children. This person must be 18 years old or older.
+fields:
+  - code: |
+      caregivers[0].name_fields()
+---
+# This is sort of a trick question, but people check checkboxes automatically. Still, trick questions are jarring
+id: Caregiver age
+question: |
+  ${ caregivers[0].name.full() }'s age
+subquestion: |
+  The person making decisions for your children must be at least 18 years old.
+fields:
+  - "Is ${ caregivers[0].name.full() } 18 years old or older": caregivers[0].is_major
+    datatype: yesnoradio
+validation code: |
+  if not caregivers[0].is_major:
+    validation_error("The person who makes decisions for your children must be 18 years old or older. You need to go back and choose someone else.", field="caregivers[0].is_major")
+---
+id: id
+# Curious to see if this works...
+if:
+  i < x.number_gathered()
+generic object: DAList
+question: |
+  ${ x[i].name.full() }'s ID
+subquestion: |
+  ${ x[i] } should also bring a valid photo ID.
+
+  ${ valid_forms_of_id }
+  
+  These questions are to help you make a plan. We will add these answers to your reminder document. You can skip any of these questions if you want.
+fields:
+  - Does ${ x[i] } have a valid photo ID with them now?: x[i].has_valid_id
+    datatype: yesnomaybe
+    required: False
+  - Can ${ x[i] } get or find a valid photo ID?: x[i].can_get_valid_id
+    datatype: yesnomaybe
+    required: False
+    js show if: |
+      val('x[i].has_valid_id') == "None" || val('x[i].has_valid_id') == false
+  - "So we can remind you later, what will be your next steps for making sure ${ x[i].name.full() } brings a valid photo ID?": x[i].valid_id_next_steps
+    required: False
+    js show if: |
+      val('x[i].has_valid_id') == "None" || val('x[i].has_valid_id') == false
+---
+id: marital status
+generic object: DAList
+question: |
+  Marital status
+fields:
+  - Are you married?: x[i].is_married
+    datatype: yesnoradio
+    show if:
+      code: |
+        i == 0
+  - Is ${ users[i].name.full() } married?: x[i].is_married
+    datatype: yesnoradio
+    show if:
+      code: |
+        i > 0
+---
+id: children
+sets:
+  - parental_delegation_children[i].name.first
+  - parental_delegation_children[i].name.last
+  - parental_delegation_children[i].name.middle
+  - parental_delegation_children[i].name.suffix
+question: |
+  % if i == 0:
+  Information about the first child you want ${ caregivers[0].name.full() } to make decisions for
+  % else:
+  Information about the ${ ordinal(i) } child you want ${ caregivers[0].name.full() } to make decisions for
+  % endif
+subquestion: |
+  % if i > 0:
+  You have already told us about **${ comma_and_list( parental_delegation_children.complete_elements() ) }**.
+  % endif
+fields:
+  - code: |
+      parental_delegation_children[i].name_fields()
+  - Are you a parent or guardian of this child?: parental_delegation_children[i].user_is_parentish
+    datatype: yesnoradio
+validation code: |
+  if not parental_delegation_children[i].user_is_parentish:
+    validation_error('If you are not the parent or guardian of the child you cannot put the child on this form.', field='parental_delegation_children[i].user_is_parentish')
+---
+id: there is another child
+question: |
+  Do you want to add another child to the document?
+subquestion: |
+  This child must be younger than 18 years old. You must be the child's parent or guardian.
+yesno: parental_delegation_children.there_is_another
+---
+id: mandates
+question: |
+  % if parental_delegation_children.number_gathered() > 1:
+  What decisions do you want ${ caregivers[0].name.full() } to make for your children?
+  % else:
+  What decisions do you want ${ caregivers[0].name.full() } to make for ${ parental_delegation_children[0].name.first }?
+  % endif
+subquestion: |
+  You can choose what decisions ${ caregivers[0].name.full() } can make for your child.
+  % if parental_delegation_children.number_gathered() > 1:
+  There are some decisions ${ caregivers[0].name.full() } CANNOT make for your children. They are these ones:
+  % else:
+  There are some decisions ${ caregivers[0].name.full() } CANNOT make for ${ parental_delegation_children[0].name.first }. They are these ones:
+  % endif
+  
+  - They cannot make decisions about marriage or adoption.
+  - They cannot make decisions about abortion.
+  - They cannot take away your rights as a parent of ${ 'your children' if parental_delegation_children.number_gathered() > 1 else parental_delegation_children[0].name.first }.
+  
+  You have the right to cancel these permissions at any time.
+fields:
+  - "Which of these do you want ${ caregivers[0].name.full() } to decide for your children?": parental_delegation_mandates
+    datatype: checkboxes
+    none of the above: False
+    choices:
+      code: |
+        parental_delegation_mandates_map
+    show if:
+      code: |
+        parental_delegation_children.number_gathered() > 1
+  - "Which of these do you want ${ caregivers[0].name.full() } to decide for ${ parental_delegation_children[0].name.first }?": parental_delegation_mandates
+    datatype: checkboxes
+    none of the above: False
+    choices:
+      code: |
+        parental_delegation_mandates_map
+    show if:
+      code: |
+        parental_delegation_children.number_gathered() <= 1
+---
+id: madates values
+variable name: parental_delegation_mandates_map
+data: !!omap
+  - medical: "Consent to and authorize such medical care, treatment, or surgery as may be necessary for the health, safety, and welfare of ${ comma_and_list( parental_delegation_children ) }"
+  - education: "Enroll ${ comma_and_list( parental_delegation_children ) } in the schools or other educational institutions they need for their proper education."
+  - discipline: "Reasonably discipline ${ comma_and_list( parental_delegation_children ) } if necessary for their proper rearing, supervision, and training."
+  - general: "Do other actions needed to shelter, support, and generally care for the welfare of ${ comma_and_list( parental_delegation_children ) }."
+---
+id: parental delegation dates
+continue button field: parental_delegation_dates
+check in: calc_max_delegation_expiry
+question: |
+  Start and end dates
+subquestion: |
+  When you see the notary you will have to use a pen to write the start and end dates for ${ caregivers[0].name.full() }'s permission to make decisions. If you answer these questions we will make a document for you that will remind you about those dates. You can skip this question and decide later.
+
+  You must sign this document on the start date.
+
+  ${ caregivers[0].name.full() } can have permission to make decisions for ${ comma_and_list( parental_delegation_children ) } for up to 1 year.
+fields:
+  - "Do you want to pick dates now or later?": decide_delegation_dates_later
+    required: False
+    default: False
+    datatype: radio
+    choices:
+      - Now: False
+      - Later: True
+  - "When will you sign this document so ${ caregivers[0].name.full() } can start making decisions?": delegation_start_date
+    required: False
+    datatype: ThreePartsDate
+    alMin: ${ today().format('MM/dd/yyyy') }
+    hide if: decide_delegation_dates_later
+  - note: |
+      [TARGET delegation_expiry_help]
+    hide if: decide_delegation_dates_later
+  - "When do you want ${ caregivers[0].name.full() } to stop making decisions?": delegation_end_date
+    # Never require even if "start" is answered. We will use what they give us.
+    required: False
+    datatype: ThreePartsDate
+    alMin: ${ today().format('MM/dd/yyyy') }
+    hide if: decide_delegation_dates_later
+css: |
+  <style>
+    .datargetdelegation_expiry_help,
+    .delegation_end_date_help {
+      display: inline-block;
+      height: fit-content;
+      max-height: fit-content;
+      margin-bottom: 0;
+    }
+  </style>
+---
+id: delegation expiry limits
+event: calc_max_delegation_expiry
+# Discuss: Use the same as AK form since military var doesn't interfere?
+# `sets:` not required, but avoids confusing red text in editor
+sets:
+  - delegation_duration_rule
+  - is_over_max_delegation_date
+  - live_delegation_end
+  - live_delegation_start
+  - max_delegation_expiry
+comment: |
+  Language and flow possibilities:
+  Previous page: "Do you want help figuring out your start and end dates for the delegation?"
+  "Here is what your reminder will look like:"
+code: |
+  # How to show something different when the server is reloading but the user is seeing the same message? Need to detect checkin call or "change" event while on the page.
+  
+  import re
+
+  def as_date_or_None( some_str ):
+    """
+    Return a valid date input string as a date, otherwise None
+    Args:
+      some_str (str) A string that may or may not be a valid date
+    Returns:
+      (DADateTime or None)
+    """
+    if not some_str:
+      # Allow for input of None or empty string
+      return None
+    else:
+      # If error, fail silently. Default messages are enough.
+      try:
+        if re.fullmatch(r'\d\d?/\d\d?/\d\d\d\d', some_str ):
+          input_date = as_datetime( some_str )
+          if str( input_date ) != 'Bad date':
+            return input_date
+      except Exception as err:
+        return None
+    return None
+  
+
+  # === Get input values ===
+
+  live_delegation_start = as_date_or_None( action_argument('delegation_start_date') )
+  live_delegation_end = as_date_or_None( action_argument('delegation_end_date') )
+
+  # Defaults
+  delegation_duration_rule = "a year after the start date"
+
+  # Actual end date maximum vals if possible
+  max_delegation_expiry = None
+  if live_delegation_start != None:
+    max_delegation_expiry = live_delegation_start.plus( years=1 )
+
+  is_over_max_delegation_date = False
+  try:
+    if live_delegation_end > max_delegation_expiry:
+      is_over_max_delegation_date = True
+  except:
+    pass
+
+  max_delegation_expiry_msg
+---
+comment: |
+  We need another field to make the user click off of the end date so they can see their validation message.
+
+  `check in:` should have a `check in event/event type:`
+target: delegation_expiry_help
+template: max_delegation_expiry_msg
+content: |
+  % if live_delegation_end and max_delegation_expiry and is_over_max_delegation_date:
+  <div class="delegation_end_date_help h-auto alert alert-warning" markdown=1>
+  <i class="fa-solid fa-face-frown"></i> **WARNING**: You must pick an end date **on or before** ${ delegation_duration_rule }.
+  % else:
+  <div class="delegation_end_date_help h-auto alert alert-info" markdown=1>
+  If you pick and end date, you must pick a date **on or before** ${ delegation_duration_rule }.
+  % endif
+  
+  % if live_delegation_start:
+  This permission will **start** on ${ live_delegation_start }, so you must **pick an end date on or before** ${ max_delegation_expiry }. You can also leave it blank.
+  % endif
+  
+  </div>
+---
+---
+id: la parental delegation review screen
+event: review_la_provisional_custody_by_mandate
+question: |
+  Review your answers
+review:
+  - Edit:
+      - users[0].name.first
+      - users[0].address.address
+      - users[0].is_married
+      - notary
+      - follow up:
+        - users[0].has_valid_id
+        - users[1].has_valid_id
+        - caregivers[0].has_valid_id
+    button: |
+      ### Your information
+  - Edit: users[0].name.first
+    button: |
+      **Name**: ${ users[0].name.full() }
+  - Edit: users[0].address.address
+    button: |
+      **Address**:[BR]${ users[0].address.block() }
+  - Edit: users[0].is_married
+    button: |
+      **Married**: ${ users[0].is_married }
+  - Edit:
+      - notary
+    button: |
+      **Notarization**
+      
+      You plan to use a notary public or someone else who has the power to take oaths to notarize your documents.
+
+      % if users[0].certification_next_steps:
+      **To prepare to notarize your documents you plan to:**[BR]
+      ${ users[0].certification_next_steps }
+      % endif
+  - Edit: users[0].has_valid_id
+    show if: not users[0].needs_TF_835
+    button: |
+      **Your photo ID:**
+
+      % if users[0].has_valid_id:
+      You have a valid photo ID.
+      
+      % elif users[0].can_get_valid_id:
+      You plan to find a valid photo ID.
+      
+      % else:
+      You plan go to a notary public (or someone else who has the power to take oaths) without a valid photo ID.
+      % endif
+
+      % if users[0].valid_id_next_steps:
+      **Your next steps to make sure you bring a valid photo ID:**[BR]
+      ${ users[0].valid_id_next_steps }
+      % endif
+
+      ${ valid_forms_of_id }
+  - note: |
+      ---
+  - Edit:
+      - users[1].name.first
+      - users[1].address.address
+      - users[1].is_married
+      - follow up:
+        - users[1].has_valid_id
+    button: |
+      ### ${ users[1].name.full() }'s information
+  - Edit: users[1].name.first
+    button: |
+      **Name**: ${ users[1].name.full() }
+  - Edit: users[1].address.address
+    button: |
+      **Address**:[BR]${ users[1].address.block() }
+  - Edit: users[1].is_married
+    button: |
+      **Married**: ${ users[1].is_married }
+  - Edit: users[1].has_valid_id
+    button: |
+      **${ users[1].name.full() }'s photo ID:**
+
+      % if users[1].has_valid_id:
+      ${ users[1].name.full() }'s has a valid photo ID.
+      
+      % elif users[1].can_get_valid_id:
+      You plan to find ${ users[1].name.full() }'s valid photo ID.
+      
+      % else:
+      You plan go to a notary public (or someone else who has the power to take oaths) without a valid photo ID for ${ users[1].name.full() }.
+      % endif
+
+      % if users[1].valid_id_next_steps:
+      **Your next steps to make sure ${ users[1].name.full() } brings a valid photo ID:**[BR]
+      ${ users[1].valid_id_next_steps }
+      % endif
+
+      ${ valid_forms_of_id }
+  - note: |
+      ---
+  - Edit:
+      - caregivers[0].name.first
+      - caregivers[0].is_major
+      - caregivers[0].address.address
+      - follow up:
+        - caregivers[0].has_valid_id
+    button: |
+      ### ${ caregivers[0].name.full() }'s information
+  - Edit: caregivers[0].name.first
+    button: |
+      **Name**: ${ caregivers[0].name.full() }
+  - Edit: caregivers[0].is_major
+    button: |
+      **Over 18**: ${ caregivers[0].is_major }
+  - Edit: caregivers[0].address.address
+    button: |
+      **Address**:[BR]${ caregivers[0].address.block() }
+  - Edit: caregivers[0].has_valid_id
+    button: |
+      **${ caregivers[1].name.full() }'s photo ID:**
+
+      % if caregivers[1].has_valid_id:
+      ${ caregivers[1].name.full() }'s has a valid photo ID.
+      
+      % elif caregivers[1].can_get_valid_id:
+      You plan to find ${ caregivers[1].name.full() }'s valid photo ID.
+      
+      % else:
+      You plan go to a notary public (or someone else who has the power to take oaths) without a valid photo ID for ${ caregivers[1].name.full() }.
+      % endif
+
+      % if caregivers[1].valid_id_next_steps:
+      **Your next steps to make sure ${ caregivers[1].name.full() } brings a valid photo ID:**[BR]
+      ${ caregivers[1].valid_id_next_steps }
+      % endif
+
+      ${ valid_forms_of_id }
+  - note: |
+      ---
+  - Edit: parental_delegation_children.revisit
+    button: |
+      ### Your children
+      
+      **${ caregivers[0].name.full() } can make decisions for these children**
+
+      % for child in parental_delegation_children:
+      * ${ child.name.full() }
+      % endfor
+  - note: |
+      ---
+  - Edit:
+      - parental_delegation_mandates
+      - parental_delegation_dates
+    button: |
+      ### Decisions
+  - Edit:
+      - parental_delegation_mandates
+    button: |
+      % if parental_delegation_children.number_gathered() > 1:
+      **You want ${ caregivers[0].name.full() } to make these decisons for your children**:
+      % else:
+      **You want ${ caregivers[0].name.full() } to make these decisons for${ parental_delegation_children[0].name.first }**:
+      % endif
+      
+      % for mandate_key in parental_delegation_mandates.true_values():
+      * ${ parental_delegation_mandates_map[ mandate_key ] }
+      % endfor
+  - Edit:
+      - parental_delegation_dates
+    button: |
+      % if not decide_delegation_dates_later and delegation_start_date:
+      **Start date**: ${ delegation_start_date }[BR]
+      % else:
+      **Start date**: You skipped choosing a start date.[BR]
+      % endif
+      % if not decide_delegation_dates_later and delegation_end_date:
+      **End date**: ${ delegation_end_date }
+      % else:
+      **End date**: You skipped choosing an end date.
+      % endif
+---
+continue button field: parental_delegation_children.revisit
+question: |
+  Your children
+subquestion: |
+  Add the children that you want ${ caregivers[0].name.full() } to make decisions for. You must be their parent or guardian.
+  
+  ${ parental_delegation_children.table }
+  
+  ${ parental_delegation_children.add_action(label="Add a child") }
+---
+table: parental_delegation_children.table
+rows: parental_delegation_children
+columns:
+  - Name: |
+      row_item.name_full() if defined("row_item.name.first") else ""
+  - Birthdate: |
+      row_item.birthdate if defined("row_item.birthdate") else ""
+edit:
+  - name.first
+  - birthdate
+confirm: True
+---
+---
+template: valid_forms_of_id
+content: |
+  Valid photo IDs include:
+
+  * A US driver's license
+  * A US passport
+---
+---
+id: download la_provisional_custody_by_mandate_download plain
+event: la_provisional_custody_by_mandate_download_plain
+question: |
+  All done! :face-smile:
+subquestion: |
+  Thank you, ${ comma_and_list( users ) }. Your document is ready to download at the bottom of the page. Here is what you need to do next.
+
+  **Before you print the form:**
+  
+  1. [Look at the document at the bottom of the page](#documents) to make sure it is correct.
+  1. Tap the "Edit answers" button to fix any mistakes.
+
+  **Next steps:**
+
+  % if other_delegation_parent_exists:
+  1. Print 3 copies of the document.
+  % else:
+  1. Print 2 copies of the document.
+  % endif
+  1. Go to the [notary certified by Louisiana](https://courtformsonline.org/guides/finding-and-using-a-notary) or other person who has the power to take oaths.
+  % if decide_delegation_dates_later == True:
+  1. Write the dates when you want ${ caregivers[0].name.full() } to start making decisions and when you want them to stop. You can give them permission for up to 1 year.
+  % else:
+  1. Write the dates when you want ${ caregivers[0].name.full() } to start making decisions and when you want them to stop.
+  % if not decide_delegation_dates_later and delegation_start_date:
+  You said you wanted permission to start on **${ delegation_start_date }**.
+  % endif
+  % if not decide_delegation_dates_later and delegation_end_date:
+  You said you wanted permission to **end on ${ delegation_end_date }**.
+  % endif
+  % endif
+  1. Make sure you have filled out all the blank lines in the form.
+  % if users.number_gathered() > 1:
+  1. You, ${ users[1].name.full() }, and ${ caregivers[0].name.full() } should all sign all the documents in front of someone who can take oaths in Louisiana, like a notary.
+  % else:
+  1. You and ${ caregivers[0].name.full() } should both sign all the documents in front of someone who can take oaths in Louisiana, like a notary.
+  % endif
+  1. Have that person notarize and sign both documents.
+  % if other_delegation_parent_exists:
+  % if users.number_gathered() > 1:
+  1. Give one signed document to ${ users[1].name.full() }.
+  % else:
+  1. Give one signed document to the other parent.
+  % endif
+  % endif
+  1. Give one signed document to ${ caregivers[0].name.full() }.
+  1. Keep the other document for your records.
+
+  After that, ${ caregivers[0].name.full() } can show this document to prove they have permission to make decisions for ${ comma_and_list( parental_delegation_children ) }.
+
+  You may also want to:
+  
+  :phone: Add ${ caregivers[0].name.full() } as an emergency contact with the schools, doctors, and childcare provider.[BR]
+  :file-lines: Give ${ caregivers[0].name.full() } important documents, like birth certificates, insurance cards, and school or medical records.
+
+  ---
+
+  <div id="documents" style="display: hidden" aria-hidden="true"></div>
+  
+  ${ la_provisional_custody_by_mandate_bundle.download_list_html() }
+
+  <p style="text-align: right;">
+  ${ action_button_html(url_action('review_la_provisional_custody_by_mandate'), label=':pencil: Edit answers', color='info', size="md") }
+  </p>
+
+  ${ la_provisional_custody_by_mandate_bundle.send_button_html(show_editable_checkbox=True) }
+
+progress: 100
+---
+# Bundles group the ALDocuments into separate downloads
+objects:
+  - la_provisional_custody_by_mandate_bundle: ALDocumentBundle.using(elements=[la_provisional_custody_by_mandate_next_steps, la_provisional_custody_by_mandate_attachment], filename="la_provisional_custody_by_mandate", title="All forms to download for your records", enabled=True)
+  - al_recipient_bundle: ALDocumentBundle.using(elements=[la_provisional_custody_by_mandate_attachment],  filename="la_provisional_custody_by_mandate", title="All forms to file", enabled=True)
+---
+# ALDocument objects specify the metadata for each template
+objects:
+  - la_provisional_custody_by_mandate_next_steps: ALDocument.using(title="Next steps", filename="la_provisional_custody_by_mandate_next_steps.docx", enabled=True, has_addendum=False)
+  - la_provisional_custody_by_mandate_attachment: ALDocument.using(title="Louisiana provisional custody by mandate", filename="la_provisional_custody_by_mandate", enabled=True, has_addendum=False, )
+---
+# Each attachment defines a key in an ALDocument that identifies its template.
+# There are no signatures for this form, so the key is always "final"
+attachment:
+  name: Next steps
+  filename: la_provisional_custody_by_mandate_next_steps
+  docx template file: la_provisional_custody_by_mandate_next_steps.docx
+  variable name: la_provisional_custody_by_mandate_next_steps[i]
+  skip undefined: True
+  tagged pdf: True
+---
+attachment:
+  name: LA provisional custody by mandate
+  filename: la_provisional_custody_by_mandate
+  variable name: la_provisional_custody_by_mandate_attachment[i]
+  skip undefined: True
+  docx template file: la_provisional_custody_by_mandate.docx
+  tagged pdf: True
+---
+
